@@ -1,6 +1,6 @@
 === Improvely for WooCommerce ===
 Contributors: dangrossman
-Tags: analytics, statistics, stats, marketing, conversion tracking, conversion tracker, click tracking, ad tracking, link cloaking, link cloaker, woocommerce
+Tags: analytics, statistics, stats, marketing, conversion tracking, conversion tracker, click tracking, ad tracking, link cloaking, link cloaker, woocommerce, improvely
 Requires at least: 2.8
 Tested up to: 3.4.2
 Stable tag: trunk
