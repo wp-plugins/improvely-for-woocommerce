@@ -46,10 +46,9 @@ function improvely_init() {
 	$improvely_id = get_option('improvely_id');
 	if (!empty($improvely_subdomain)) {
 ?>
+<script type="text/javascript" src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/improvely.js"></script>
 <script type="text/javascript">
-var im_domain = '<?php echo $improvely_subdomain; ?>';
-var im_project_id = <?php echo $improvely_id; ?>;
-(function(t,n){window._improvely=[];setTimeout(function(){var n=t,r=n.getElementsByTagName("script")[0],i=n.createElement("script");i.type="text/javascript";i.async=true;i.src=("https:"===t.location.protocol?"https:":"http:")+"//"+im_domain+".iljmp.com/improvely.js";r.parentNode.insertBefore(i,r)},1);if(typeof n.init=="undefined"){n.init=function(e,t){window._improvely.push(["init",e,t])};n.goal=function(e){window._improvely.push(["goal",e])};n.label=function(e){window._improvely.push(["label",e])}}window.improvely=n;window.improvely.init(im_domain,im_project_id)})(document,window.improvely||[]);
+  improvely.init('<?php echo $improvely_subdomain; ?>', <?php echo $improvely_id; ?>);
 </script>
 <?php 
 	}
@@ -60,7 +59,9 @@ function improvely_goal($order_id) {
 	$improvely_id = get_option('improvely_id');	
 	$order = new WC_Order($order_id);
 	?>
+<script type="text/javascript" src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/improvely.js"></script>
 <script type="text/javascript">
+improvely.init('<?php echo $improvely_subdomain; ?>', <?php echo $improvely_id; ?>);
 improvely.goal({
   type: 'sale',
   amount: <?php echo $order->order_total; ?>,
