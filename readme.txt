@@ -1,8 +1,8 @@
 === Improvely for WooCommerce ===
 Contributors: dangrossman
-Tags: analytics, statistics, stats, marketing, conversion tracking, conversion tracker, click tracking, ad tracking, link cloaking, link cloaker, woocommerce, improvely
+Tags: analytics, stats, marketing, advertising, conversion tracking, ad tracker, conversions, link cloaker, woocommerce, improvely, link tracker
 Requires at least: 2.8
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: trunk
 
 Add Improvely to your WooCommerce-powered store to measure your advertising, social media marketing and SEO results.
@@ -10,8 +10,8 @@ Add Improvely to your WooCommerce-powered store to measure your advertising, soc
 == Description ==
 
 * Measure your advertising, social media marketing and SEO results.
-* Identify the source of every purchase - what site, web search or ad first brought that customer to your shop.
-* Track the costs, revenue and profit from all your online advertising on Google AdWords, Microsoft AdCenter, and everywhere else you advertise.
+* Identify the source of every purchase - what sites, searches, ads and keywords bring customers to your shop.
+* Track the costs, revenue and profit from all your online advertising on Google AdWords, Microsoft AdCenter, Facebook, and everywhere else you advertise.
 
 Improvely makes you a smarter store owner. You'll know exactly how each of your new customers found your store without asking them - the specific website link they clicked, search they typed into Google, or ad they clicked to get to your site. All you need is WooCommerce, an Improvely account and about 60 seconds...
 
@@ -36,13 +36,13 @@ If you pay to advertise your WooCommerce store online, Improvely can track all y
 
 **Pricing & Plans**
 
-Improvely is free for 30 days so that you have a chance to try it out and decide which monthly plan best meets your needs. Our plans range from $29 to $299 per month depending on how many visitors your shop receives each month.
+Improvely is free for 14 days so that you have a chance to try it out and decide which monthly plan best meets your needs. Our plans range from $29 to $299 per month depending on how many visitors your shop receives each month.
 
 <a href="https://www.improvely.com/signup">Click here to begin your free trial</a>
 
 == Installation ==
 
-1. Enter your Improvely account details from the Improvely page in your Settings menu.
+1. Enter your Improvely account details on the Improvely page in your Settings menu.
 
 == Screenshots ==
 

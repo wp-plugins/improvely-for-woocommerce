@@ -5,20 +5,16 @@
 Plugin Name:  Improvely for WooCommerce
 Plugin URI:   http://www.improvely.com
 Description:  Integrates <a href="http://www.improvely.com">Improvely</a> with your WooCommerce store &mdash; allowing you to identify the exact traffic source of every purchase, split test ads, monitor your PPC ads for fraudulent clicks and more.
-Version:      1.0
+Version:      1.5
 Author:       Improvely
 Author URI:   http://www.improvely.com
 
 **************************************************************************/
 
-if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-
-	add_action('wp_head', 'improvely_init');
-	add_action('woocommerce_thankyou', 'improvely_goal');
-	add_action('admin_menu', 'improvely_pages');
-	add_action('admin_init', 'improvely_admin_init');
-
-}
+add_action('wp_head', 'improvely_init');
+add_action('woocommerce_thankyou', 'improvely_goal');
+add_action('admin_menu', 'improvely_pages');
+add_action('admin_init', 'improvely_admin_init');
 
 function improvely_admin_init() {
 
@@ -42,18 +38,21 @@ function improvely_pages() {
 }
 
 function improvely_warning() {
-	echo "<div id='improvely-warning' class='updated fade'><p><strong>Improvely is almost ready.</strong> ".sprintf('<a href="%1$s">Click here to configure the plugin</a>.', "admin.php?page=improvely-config")."</p></div>";
+	echo "<div id='improvely-warning' class='updated fade'><p><strong>Improvely for WooCommerce is almost ready.</strong> ".sprintf('<a href="%1$s">Click here to configure the plugin</a>.', "admin.php?page=improvely-config")."</p></div>";
 }
 
 function improvely_init() {
 	$improvely_subdomain = get_option('improvely_subdomain');
 	$improvely_id = get_option('improvely_id');
+	if (!empty($improvely_subdomain)) {
 ?>
-<script type="text/javascript" src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/improvely.js"></script>
 <script type="text/javascript">
-  improvely.init('<?php echo $improvely_subdomain; ?>', <?php echo $improvely_id; ?>);
+var im_domain = '<?php echo $improvely_subdomain; ?>';
+var im_project_id = <?php echo $improvely_id; ?>;
+(function(t,n){window._improvely=[];setTimeout(function(){var n=t,r=n.getElementsByTagName("script")[0],i=n.createElement("script");i.type="text/javascript";i.async=true;i.src=("https:"===t.location.protocol?"https:":"http:")+"//"+im_domain+".iljmp.com/improvely.js";r.parentNode.insertBefore(i,r)},1);if(typeof n.init=="undefined"){n.init=function(e,t){window._improvely.push(["init",e,t])};n.goal=function(e){window._improvely.push(["goal",e])};n.label=function(e){window._improvely.push(["label",e])}}window.improvely=n;window.improvely.init(im_domain,im_project_id)})(document,window.improvely||[]);
 </script>
 <?php 
+	}
 }
 
 function improvely_goal($order_id) {
@@ -61,14 +60,12 @@ function improvely_goal($order_id) {
 	$improvely_id = get_option('improvely_id');	
 	$order = new WC_Order($order_id);
 	?>
-<script type="text/javascript" src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/improvely.js"></script>
 <script type="text/javascript">
-  improvely.init('<?php echo $improvely_subdomain; ?>', <?php echo $improvely_id; ?>);
-  improvely.goal({
-    type: 'sale',
-    amount: <?php echo $order->order_total; ?>,
-    reference: '<?php echo $order_id; ?>'
-  });
+improvely.goal({
+  type: 'sale',
+  amount: <?php echo $order->order_total; ?>,
+  reference: '<?php echo $order_id; ?>'
+});
 </script>
 <noscript>
 <img src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/track/conversion?product=<?php echo $improvely_id; ?>&type=sale&amount=<?php echo $order->order_total; ?>&reference=<?php echo $order_id; ?>" width="1" height="1" />
@@ -126,47 +123,81 @@ function improvely_config() {
 
     <h2>Improvely Settings</h2>
 
-    <form method="post" action="admin.php?page=improvely-config">
+    <div style="width: 772px">		
 
-	<?php if (!empty($improvely_subdomain) && !empty($improvely_id)): ?>
-		<div id="message" class="updated fade"><p><strong><?php _e('Your settings have been saved. Improvely is now tracking the visits and purchases on your website.') ?></strong></p></div>
-	<?php else: ?>
-		<div style="font-size: 15px; line-height: 2em; border: 1px solid #ccc; border-radius: 8px; background: #f5f5f5; padding: 10px 20px; width: 706px">
+		<div style="background: #eee">
+			<img src="<?php echo plugins_url( 'banner.png' , __FILE__ ) ?>" alt="Banner" />
 
-			<p>
-				To install this plugin, you need an Improvely account. If you do not already have one, 
-				you can <a href="http://www.improvely.com/">sign up for a free 30-day trial here</a>.
+			<div style="padding: 10px; font-size: 13px; line-height: 1.5em">
+				<?php if (!empty($improvely_subdomain) && !empty($improvely_id)): ?>
+				<b>Your settings have been saved. Improvely is now tracking the visits and purchases on your website.</b>
+				<?php else: ?>
+				This plugin requires an <a href="http://www.improvely.com" target="_blank">Improvely</a>
+				account. If you do not already have an account, you can 
+				<a href="https://www.improvely.com/signup" target="_blank">sign up for a 14-day free trial</a>
+				right now. 
+				<?php endif; ?>
+			</div>
+		</div>
 
-				After creating your project in Improvely, copy the site name and the tracking ID from 
-				your Improvely Code into the boxes below to install this plugin.
-			</p>
-			<p>
-				<img src="<?php echo plugins_url( 'install.png' , __FILE__ ) ?>" alt="" style="border: 1px solid #ccc" />
-			</p>
+		<p>
+			Improvely for WooCommerce will send information about your website visits and purchases
+			to your Improvely account. You can view your reports and set up tracking links for your 
+			ads by clicking on Improvely under your Dashboard menu.
+		</p>
+
+		<div style="background: #eee">
+			<div style="background: #ccc; padding: 10px; font-weight: bold">Configuration</div>
+
+			<form method="post" action="admin.php?page=improvely-config">
+
+		    <table class="form-table" style="margin: 10px">
+		        <tr valign="top">
+		            <th scope="row" style="white-space: nowrap"><label>Improvely Site Name:</label></th>
+		            <td style="width: 100%">
+		                <input type="text" name="improvely_subdomain" value="<?php echo $improvely_subdomain; ?>" />
+		                .improvely.com
+		            </td>
+		        </tr>
+				<tr>
+					<th scope="row" style="white-space: nowrap"><label>Tracking ID:</label></th>
+					<td style="width: 100%">
+						<input type="text" name="improvely_id" value="<?php echo $improvely_id; ?>" />
+		            </td>
+			    </tr>
+			    <tr>
+			    	<td></td>
+			    	<td>
+			    		<input type="submit" value="Save Changes" class="button" />
+		    		</td>
+	    		</tr>
+			</table>
+
+			</form>
 
 		</div>
-	<?php endif; ?>
 
-    <table class="form-table">
-        <tr valign="top">
-            <th scope="row"><label>Improvely Site Name:</label></th>
-            <td>
-                <input type="text" name="improvely_subdomain" value="<?php echo $improvely_subdomain; ?>" />.improvely.com
-            </td>
-        </tr>
-		<tr>
-			<th scope="row"><label>Tracking ID:</label></th>
-			<td>
-				<input type="text" name="improvely_id" value="<?php echo $improvely_id; ?>" />
-            </td>
-	    </tr>
-	</table>
+		<div style="background: #eee; margin-top: 10px">
+			<div style="background: #ccc; padding: 10px; font-weight: bold">Where do I find my site name and project ID?</div>
+			<div style="padding: 10px">
+				Your site name is the subdomain you chose when you signed up, and where you 
+				log in to access your account. You can retrieve both your domain and project ID 
+				from the <b>Website Code</b> page in your account. You can return to the 
+				Website Code page by clicking <b>Click here if you need to retrieve your Improvely 
+				Code again</b> on the Getting Started screen, or by clicking on your project at the 
+				top left of your account and choosing <b>Project Settings</b>.
 
-	<br /><br />
+				<br /><br />
 
-	<input type="submit" value="Save Changes" class="button" />
+				<b>Example only, use the values from your own account:</b>
+		
+				<img src="<?php echo plugins_url( 'install.png' , __FILE__ ) ?>" alt="Banner" style="border: 1px solid #000" />
 
-	</form>
+			</div>
+		</div>
+
+	</div>
+
 </div>
 
 <?php } ?>
