@@ -161,7 +161,7 @@ function improvely_config() {
 		            </td>
 		        </tr>
 				<tr>
-					<th scope="row" style="white-space: nowrap"><label>Tracking ID:</label></th>
+					<th scope="row" style="white-space: nowrap"><label>Project ID:</label></th>
 					<td style="width: 100%">
 						<input type="text" name="improvely_id" value="<?php echo $improvely_id; ?>" />
 		            </td>
