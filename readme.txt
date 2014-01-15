@@ -2,10 +2,10 @@
 Contributors: dangrossman
 Tags: analytics, stats, marketing, advertising, conversion tracking, ad tracker, conversions, link cloaker, woocommerce, improvely, link tracker
 Requires at least: 2.8
-Tested up to: 3.5
+Tested up to: 3.8
 Stable tag: trunk
 
-Add Improvely to your WooCommerce-powered store to measure your advertising, social media marketing and SEO results.
+Add Improvely to your WooCommerce-powered store to see where every purchase came from, and prevent PPC click fraud.
 
 == Description ==
 
