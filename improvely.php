@@ -5,7 +5,7 @@
 Plugin Name:  Improvely for WooCommerce
 Plugin URI:   http://www.improvely.com
 Description:  Integrates <a href="http://www.improvely.com">Improvely</a> with your WooCommerce store &mdash; allowing you to identify the exact traffic source of every purchase, split test ads, monitor your PPC ads for fraudulent clicks and more.
-Version:      1.5
+Version:      1.6
 Author:       Improvely
 Author URI:   http://www.improvely.com
 
@@ -46,9 +46,10 @@ function improvely_init() {
 	$improvely_id = get_option('improvely_id');
 	if (!empty($improvely_subdomain)) {
 ?>
-<script type="text/javascript" src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/improvely.js"></script>
 <script type="text/javascript">
-  improvely.init('<?php echo $improvely_subdomain; ?>', <?php echo $improvely_id; ?>);
+var im_domain = '<?php echo $improvely_subdomain; ?>';
+var im_project_id = <?php echo $improvely_id; ?>;
+(function(e,t){window._improvely=[];var n=e.getElementsByTagName("script")[0];var r=e.createElement("script");r.type="text/javascript";r.src="https://"+im_domain+".iljmp.com/improvely.js";r.async=true;n.parentNode.insertBefore(r,n);if(typeof t.init=="undefined"){t.init=function(e,t){window._improvely.push(["init",e,t])};t.goal=function(e){window._improvely.push(["goal",e])};t.conversion=function(e){window._improvely.push(["conversion",e])};t.label=function(e){window._improvely.push(["label",e])}}window.improvely=t;t.init(im_domain,im_project_id)})(document,window.improvely||[])
 </script>
 <?php 
 	}
@@ -62,14 +63,17 @@ function improvely_goal($order_id) {
 <script type="text/javascript" src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/improvely.js"></script>
 <script type="text/javascript">
 improvely.init('<?php echo $improvely_subdomain; ?>', <?php echo $improvely_id; ?>);
-improvely.goal({
-  type: 'sale',
-  amount: <?php echo $order->order_total; ?>,
+improvely.conversion({
+  goal: 'sale',
+  revenue: <?php echo $order->get_total(); ?>,
   reference: '<?php echo $order_id; ?>'
 });
+<?php if (!empty($order->billing_email)): ?>
+improvely.label('<?php echo $order->billing_email; ?>');
+<?php endif; ?>
 </script>
 <noscript>
-<img src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/track/conversion?product=<?php echo $improvely_id; ?>&type=sale&amount=<?php echo $order->order_total; ?>&reference=<?php echo $order_id; ?>" width="1" height="1" />
+<img src="https://<?php echo $improvely_subdomain; ?>.iljmp.com/track/conversion?project=<?php echo $improvely_id; ?>&goal=sale&revenue=<?php echo $order->order_total; ?>&reference=<?php echo $order_id; ?>" width="1" height="1" />
 </noscript>
 	<?php
 }
