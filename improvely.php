@@ -5,7 +5,7 @@
 Plugin Name:  Improvely for WooCommerce
 Plugin URI:   http://www.improvely.com
 Description:  Integrates <a href="http://www.improvely.com">Improvely</a> with your WooCommerce store &mdash; allowing you to identify the exact traffic source of every purchase, split test ads, monitor your PPC ads for fraudulent clicks and more.
-Version:      1.6
+Version:      1.7
 Author:       Improvely
 Author URI:   http://www.improvely.com
 
@@ -68,7 +68,15 @@ improvely.conversion({
   revenue: <?php echo $order->get_total(); ?>,
   reference: '<?php echo $order_id; ?>'
 });
-<?php if (!empty($order->billing_email)): ?>
+<?php
+if (!empty($order->billing_first_name)):
+?>
+improvely.label({
+	label: '<?php echo $order->billing_email; ?>',
+	name: '<?php echo $order->billing_first_name . ' ' . $order->billing_last_name; ?>',
+	email: '<?php echo $order->billing_email; ?>'
+});
+<?php elseif (!empty($order->billing_email)): ?>
 improvely.label('<?php echo $order->billing_email; ?>');
 <?php endif; ?>
 </script>
