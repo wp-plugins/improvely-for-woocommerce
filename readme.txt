@@ -1,15 +1,15 @@
 === Improvely for WooCommerce ===
 Contributors: dangrossman
-Tags: analytics, stats, marketing, advertising, conversion tracking, ad tracker, conversions, link cloaker, woocommerce, improvely, link tracker
+Tags: improvely, woocommerce, conversion tracking, link tracker, cloaking, cloaker, click tracker, ad tracker, conversions, analytics
 Requires at least: 2.8
 Tested up to: 4.2.2
 Stable tag: trunk
 
-Add Improvely to your WooCommerce-powered store to see where every purchase came from, and prevent PPC click fraud.
+Improvely shows you the traffic source of every sale on your site, plus protects your PPC ads from click fraud.
 
 == Description ==
 
-* Identify the source of every purchase - what sites, searches, ads and keywords bring customers to your shop.
+* Identify the source of every purchase - what sites, searches, ads and keywords bring customers to your site.
 * Track the performance of all your online marketing at AdWords, Bing Ads, Facebook and everywhere else you advertise.
 * Monitor your ads for click fraud &mdash; protect your budget from competitors and bots!
 
@@ -32,11 +32,11 @@ Plus, you'll get over 30 online reports detailing the performance of all your tr
 
 **Measure Your Advertising Results**
 
-If you pay to advertise your WooCommerce store online, Improvely can track all your advertising results. You'll see the cost, revenue generated, cost-per-acquisition and profit for each marketing campaign you run - plus you can drill down to individual ads, landing pages, keywords, locations and more to see which are bringing you new customers and which are wasting your money.
+If you advertise online, start keeping tabs on all your ads from right within your WordPress dashboard. You'll see the cost, revenue generated, cost-per-acquisition and profit for each marketing campaign you run - plus you can drill down to individual ads, landing pages, keywords, locations and more to see which are bringing you new customers and which are wasting your money.
 
 **Pricing & Plans**
 
-Improvely is free for 14 days so that you have a chance to try it out and decide which monthly plan best meets your needs. Our plans start from $29 per month depending on how many visitors your shop receives each month.
+Improvely is free for 14 days so that you have a chance to try it out and decide which monthly plan best meets your needs. Our plans start from $29 per month depending on how many visitors your site receives each month.
 
 <a href="https://www.improvely.com/signup">Click here to begin your free trial</a>
 
